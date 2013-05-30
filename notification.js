@@ -214,7 +214,7 @@ angular.module('notifications', []).
      */
     console.log('this is a new directive');
     var html =
-      '<div class="dr-notification-wrapper" ng-repeat="noti in queue">' +
+      '<div class="dr-notification-wrapper" ng-repeat="noti in queue" ng-animate="\'custom\'">' +
         '<div class="dr-notification-close-btn" ng-click="removeNotification(noti)">' +
           '<i class="icon-remove"></i>' +
         '</div>' +

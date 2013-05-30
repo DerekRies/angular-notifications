@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html ng-app="demo">
+  <head>
+    <title>Demo Page</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="notification.min.css">
+    <link rel="stylesheet" href="docs.css">
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+
+    <div class="jumbotron masthead">
+      <div class="container">
+        <h1>Angular Notifications</h1>
+        <p>An angularjs component to make notifications super easy!</p>
+        <a href="#" class="btn btn-primary">Download</a>
+      </div>
+    </div>
+
+    <div notifications="bottom right"></div>
+
+    <div class="container" style="margin-top:50px;" ng-controller="MainCtrl">
+      <h2>Demo</h2>
+      <form>
+        <label for="">Notification Title:</label>
+        <input type="text" ng-model="notiTitle">
+        <label for="">Notification Content</label>
+        <input type="text" ng-model="notiText">
+        <br>
+        <label for="">Create a Notification</label>
+        <div class="btn-group">
+          <button class="btn" ng-click="makeInfo()">Info</button>
+          <button class="btn" ng-click="makeWarning()">Warning</button>
+          <button class="btn" ng-click="makeError()">Error</button>
+          <button class="btn" ng-click="makeSuccess()">Success</button>
+        </div>
+        <br>
+        <br>
+        <button class="btn">Enable HTML5 Notifications</button>
+      </form>
+
+      <hr>
+
+      <h2>Docs</h2>
+      <p>Coming soon. For now reference the <a href="https://github.com/DerekRies/Angular-Notifications">README</a></p>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="notification.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
