@@ -2,61 +2,7 @@
 
 angular.module('notifications', []).
   factory('$notification', ['$timeout',function($timeout){
-    /*
-      The $notification service provides the ability for users to send notifications
-      of various levels of importance around their application. Using some of the other
-      components contained within this library they can also get the ability for these
-      notifications to act like the toast notifications on many other platforms.
 
-      All notifications are added into the notifications array, which is also persisted
-      through local storage (additionally through some database backend if so desired by
-      the end user). Notifications that are expected to be displayed are also added to a
-      queue which can be used by the notifications controller to display them with
-      animations in and out.
-
-      It's very common for applications to have a notifications button as well where they
-      can bring up all the recent notifications they've gotten and click through them.
-      This is supported as well by querying for all of the notifications that are stored
-      by this service.
-
-      There will also be support for configuring settings that will allow your users to
-      explicitly state which notifications they would like to recieve. This will make it
-      so only notifications that are on will be added to the queue. Also when querying
-      for notifications it will return only those that are not turned off.
-
-
-      Types of Notifications:
-      1. Info - A basic notification that gives some small bit of information
-
-      2. Warning - Lets the user know something didn't work just right.
-
-      3. Error - Let the user know something went wrong. This is usually to let them know
-         some other action is now required by them. e.g. Retrying the failed action.
-
-      4. Success - Some action was completed successfuly (don't use this for small actions
-         that could be spammed)
-
-      5. Progress - A progress notification is a special type of notification that stays on
-         screen until loading reaches 100% and turns into a success or error notification
-         by default. They display a loading widget to indicate the progress of some action
-         like uploading something perhaps.
-
-         This one will be tricky to pull off, how should the notification be informed of
-         the progress of some action. When the user creates this notification should they
-         be given an object that can be used to update that progress?
-
-      6. Custom - Is configured by the user to make special notifications.
-
-      Every notification call can attach a piece of userData to that notification. This lets
-      the user filter notifications by certain bits of information they may have attached to
-      it.
-
-      The notifications API should have some settings that let users control what it's doing
-      with more fine control. Like setting the durations of specific notification types.
-
-      Also one thing that would be nice to use is HTML5 notifications if opted for. This is
-      called html5Mode.
-    */
     console.log('notification service online');
     var notifications = JSON.parse(localStorage.getItem('$notifications')) || [],
         queue = [];
