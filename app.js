@@ -7,6 +7,10 @@ angular.module('demo', ['notifications']).
       $notification.success('Notifications Demo', 'The notifications demo is working!');
     }, 500);
 
+    $scope.gimmeHTML5 = function(){
+      $notification.enableHtml5Mode();
+    };
+
     $scope.makeInfo = function(){
       if($scope.notiTitle !== '' || $scope.notiText !== ''){
         $notification.info($scope.notiTitle, $scope.notiText);
