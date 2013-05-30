@@ -8,6 +8,9 @@ to use Chrome Notifications instead.
 
 This is an early release, and I'm going to be changing a lot of stuff soon.
 
+### Demo
+You can check out a really simple [Demo right here](http://derekries.github.io/Angular-Notifications). Documentation beyond this README coming soon.
+
 ### Dependencies
 This component is an angularjs component so it should be obvious it depends on angular.
 Also for the default notifications **font-awesome 3.1.1** is required to display the icons.
