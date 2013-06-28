@@ -230,15 +230,6 @@ angular.module('notifications', []).
         '</div>' +
       '</div>';
 
-    function NotificationsCtrl( $scope ){
-
-      $scope.queue = $notification.getQueue();
-
-      $scope.removeNotification = function(noti){
-        $scope.queue.splice($scope.queue.indexOf(noti), 1);
-      };
-
-    }
 
     function link(scope, element, attrs){
       var position = attrs.notifications;
@@ -255,7 +246,14 @@ angular.module('notifications', []).
       scope: {},
       template: html,
       link: link,
-      controller: NotificationsCtrl
+      controller: ['$scope', function NotificationsCtrl( $scope ){
+        $scope.queue = $notification.getQueue();
+
+        $scope.removeNotification = function(noti){
+          $scope.queue.splice($scope.queue.indexOf(noti), 1);
+        };
+      }
+    ]
 
     };
   }]);
