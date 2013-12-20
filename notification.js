@@ -224,8 +224,8 @@ angular.module('notifications', []).
             '<img ng-src="{{noti.image}}" ng-switch-default />' +
           '</div>' +
           '<div class="dr-notification-content">' +
-            '<h3 class="dr-notification-title">{{noti.title}}</h3>' +
-            '<p class="dr-notification-text">{{noti.content}}</p>' +
+            '<h3 class="dr-notification-title" ng-bind="noti.title"></h3>' +
+            '<p class="dr-notification-text" ng-bind-html-unsafe="noti.content"></p>' +
           '</div>' +
         '</div>' +
       '</div>';
