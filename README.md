@@ -43,10 +43,10 @@ like:
 
 You can use these methods with the following line of code
 
-`$notification.info(title, content, userData);`
-`$notification.warning(title, content, userData);`
-`$notification.error(title, content, userData);`
-`$notification.success(title, content, userData);`
+`$notification.info(title, content, duration, userData);`
+`$notification.warning(title, content, duration, userData);`
+`$notification.error(title, content, duration, userData);`
+`$notification.success(title, content, duration, userData);`
 
 **Title** is of course the title displayed in a large, bold text on the notification.
 **Content** is the additional detail text for that notification.
