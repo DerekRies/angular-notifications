@@ -43,13 +43,15 @@ like:
 
 You can use these methods with the following line of code
 
-`$notification.info(title, content, userData);`
-`$notification.warning(title, content, userData);`
-`$notification.error(title, content, userData);`
-`$notification.success(title, content, userData);`
+`$notification.info(title, content, duration, userData);`
+`$notification.warning(title, content, duration, userData);`
+`$notification.error(title, content, duration, userData);`
+`$notification.success(title, content, duration, userData);`
 
 **Title** is of course the title displayed in a large, bold text on the notification.
-**Content** is the additional detail text for that notification. The **userData** parameter
+**Content** is the additional detail text for that notification.
+**Duration** is optional (milliseconds): It allows you to set how long the notification is shown. Put `0` or `false` if you want a persistent notification. If not given it take the value in the setting (5000).
+The **userData** parameter
 is optional but allows you to store some data with a particular notification.
 
 You can also use a generic notify method more inline with the standard chrome desktop

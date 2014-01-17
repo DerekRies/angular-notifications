@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('notifications', []).
-  factory('$notification', ['$timeout',function($timeout){
+  factory('$notification', ['$timeout',function($timeout) {
 
     console.log('notification service online');
     var notifications = JSON.parse(localStorage.getItem('$notifications')) || [],
@@ -20,16 +20,16 @@ angular.module('notifications', []).
       html5DefaultIcon: 'icon.png'
     };
 
-    function html5Notify(icon, title, content, ondisplay, onclose){
-      if(window.webkitNotifications.checkPermission() === 0){
-        if(!icon){
+    function html5Notify(icon, title, content, ondisplay, onclose) {
+      if (window.webkitNotifications.checkPermission() === 0) {
+        if (!icon) {
           icon = 'favicon.ico';
         }
         var noti = window.webkitNotifications.createNotification(icon, title, content);
-        if(typeof ondisplay === 'function'){
+        if (typeof ondisplay === 'function') {
           noti.ondisplay = ondisplay;
         }
-        if(typeof onclose === 'function'){
+        if (typeof onclose === 'function') {
           noti.onclose = onclose;
         }
         noti.show();
@@ -44,55 +44,55 @@ angular.module('notifications', []).
 
       /* ========== SETTINGS RELATED METHODS =============*/
 
-      disableHtml5Mode: function(){
+      disableHtml5Mode: function() {
         settings.html5Mode = false;
       },
 
-      disableType: function(notificationType){
+      disableType: function(notificationType) {
         settings[notificationType].enabled = false;
       },
 
-      enableHtml5Mode: function(){
+      enableHtml5Mode: function() {
         // settings.html5Mode = true;
         settings.html5Mode = this.requestHtml5ModePermissions();
       },
 
-      enableType: function(notificationType){
+      enableType: function(notificationType) {
         settings[notificationType].enabled = true;
       },
 
-      getSettings: function(){
+      getSettings: function() {
         return settings;
       },
 
-      toggleType: function(notificationType){
+      toggleType: function(notificationType) {
         settings[notificationType].enabled = !settings[notificationType].enabled;
       },
 
-      toggleHtml5Mode: function(){
+      toggleHtml5Mode: function() {
         settings.html5Mode = !settings.html5Mode;
       },
 
-      requestHtml5ModePermissions: function(){
-        if (window.webkitNotifications){
-          console.log('notifications are available');
+      requestHtml5ModePermissions: function() {
+        if (window.webkitNotifications) {
+          //console.log('notifications are available');
           if (window.webkitNotifications.checkPermission() === 0) {
             return true;
           }
           else{
-            window.webkitNotifications.requestPermission(function(){
-              if(window.webkitNotifications.checkPermission() === 0){
+            window.webkitNotifications.requestPermission(function() {
+              if (window.webkitNotifications.checkPermission() === 0) {
                 settings.html5Mode = true;
               }
-              else{
+              else {
                 settings.html5Mode = false;
               }
             });
             return false;
           }
         }
-        else{
-          console.log('notifications are not supported');
+        else {
+          //console.log('notifications are not supported');
           return false;
         }
       },
@@ -100,35 +100,35 @@ angular.module('notifications', []).
 
       /* ============ QUERYING RELATED METHODS ============*/
 
-      getAll: function(){
+      getAll: function() {
         // Returns all notifications that are currently stored
         return notifications;
       },
 
-      getQueue: function(){
+      getQueue: function() {
         return queue;
       },
 
       /* ============== NOTIFICATION METHODS ==============*/
 
-      info: function(title, content, userData){
-        console.log(title, content);
-        return this.awesomeNotify('info','info', title, content, userData);
+      info: function(title, content, duration, userData) {
+        //console.log(title, content);
+        return this.awesomeNotify('info','info', title, content, duration, userData);
       },
 
-      error: function(title, content, userData){
-        return this.awesomeNotify('error', 'remove', title, content, userData);
+      error: function(title, content, duration, userData) {
+        return this.awesomeNotify('error', 'times-circle', title, content, duration, userData);
       },
 
-      success: function(title, content, userData){
-        return this.awesomeNotify('success', 'ok', title, content, userData);
+      success: function(title, content, duration, userData) {
+        return this.awesomeNotify('success', 'check', title, content, duration, userData);
       },
 
-      warning: function(title, content, userData){
-        return this.awesomeNotify('warning', 'exclamation', title, content, userData);
+      warning: function(title, content, duration, userData) {
+        return this.awesomeNotify('warning', 'exclamation', title, content, duration, userData);
       },
 
-      awesomeNotify: function(type, icon, title, content, userData){
+      awesomeNotify: function(type, icon, title, content, duration, userData) {
         /**
          * Supposed to wrap the makeNotification method for drawing icons using font-awesome
          * rather than an image.
@@ -139,16 +139,16 @@ angular.module('notifications', []).
          * through classes.
          */
         // image = '<i class="icon-' + image + '"></i>';
-        return this.makeNotification(type, false, icon, title, content, userData);
+        return this.makeNotification(type, false, icon, title, content, duration, userData);
       },
 
-      notify: function(image, title, content, userData){
+      notify: function(image, title, content, duration, userData) {
         // Wraps the makeNotification method for displaying notifications with images
         // rather than icons
-        return this.makeNotification('custom', image, true, title, content, userData);
+        return this.makeNotification('custom', image, true, title, content, duration, userData);
       },
 
-      makeNotification: function(type, image, icon, title, content, userData){
+      makeNotification: function(type, image, icon, title, content, duration, userData) {
         var notification = {
           'type': type,
           'image': image,
@@ -160,18 +160,25 @@ angular.module('notifications', []).
         };
         notifications.push(notification);
 
-        if(settings.html5Mode){
-          html5Notify(image, title, content, function(){
+        if (duration == undefined) {
+          var duration = settings[type].duration;
+        }
+
+        if (settings.html5Mode) {
+          html5Notify(image, title, content, function() {
             console.log("inner on display function");
-          }, function(){
+          }, function() {
             console.log("inner on close function");
           });
         }
-        else{
+        else {
           queue.push(notification);
-          $timeout(function removeFromQueueTimeout(){
-            queue.splice(queue.indexOf(notification), 1);
-          }, settings[type].duration);
+
+          if (duration) {
+            $timeout(function removeFromQueueTimeout() {
+              queue.splice(queue.indexOf(notification), 1);
+            }, duration);
+          }
 
         }
 
@@ -182,27 +189,27 @@ angular.module('notifications', []).
 
       /* ============ PERSISTENCE METHODS ============ */
 
-      save: function(){
+      save: function() {
         // Save all the notifications into localStorage
         // console.log(JSON);
-        if(settings.localStorage){
+        if (settings.localStorage) {
           localStorage.setItem('$notifications', JSON.stringify(notifications));
         }
         // console.log(localStorage.getItem('$notifications'));
       },
 
-      restore: function(){
+      restore: function() {
         // Load all notifications from localStorage
       },
 
-      clear: function(){
+      clear: function() {
         notifications = [];
         this.save();
       }
 
     };
   }]).
-  directive('notifications', ['$notification', '$compile', function($notification, $compile){
+  directive('notifications', ['$notification', '$compile', function($notification, $compile) {
     /**
      *
      * It should also parse the arguments passed to it that specify
@@ -246,10 +253,10 @@ angular.module('notifications', []).
       scope: {},
       template: html,
       link: link,
-      controller: ['$scope', function NotificationsCtrl( $scope ){
+      controller: ['$scope', function NotificationsCtrl( $scope ) {
         $scope.queue = $notification.getQueue();
 
-        $scope.removeNotification = function(noti){
+        $scope.removeNotification = function(noti) {
           $scope.queue.splice($scope.queue.indexOf(noti), 1);
         };
       }
