@@ -43,14 +43,16 @@ like:
 
 You can use these methods with the following line of code
 
-`$notification.info(title, content, userData);`
-`$notification.warning(title, content, userData);`
-`$notification.error(title, content, userData);`
-`$notification.success(title, content, userData);`
+`$notification.info(title, content, userData, duration);`
+`$notification.warning(title, content, userData, duration);`
+`$notification.error(title, content, userData, duration);`
+`$notification.success(title, content, userData, duration);`
 
 **Title** is of course the title displayed in a large, bold text on the notification.
 **Content** is the additional detail text for that notification. The **userData** parameter
 is optional but allows you to store some data with a particular notification.
+
+**Duration** is optional (milliseconds): It allows you to set hhow long the notification is shown. Put `0` or `false` if you want a persistent notification. If not given it take the value in the setting.
 
 You can also use a generic notify method more inline with the standard chrome desktop
 notifications by specifying an image to display in the notification.
