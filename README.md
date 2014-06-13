@@ -10,7 +10,7 @@ This is an early release, and I'm going to be changing a lot of stuff soon.
 
 ### Demo
 ### v0.1
-You can check out a really simple [Demo right here](http://derekries.github.io/angular-notifications). Documentation beyond this README coming soon.
+You can check out a really simple [Demo right here](http://nramirez.github.io/angularNotifications). Documentation beyond this README coming soon.
 
 ### Dependencies
 ### v0.1
