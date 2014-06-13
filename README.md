@@ -9,11 +9,14 @@ to use Chrome Notifications instead.
 This is an early release, and I'm going to be changing a lot of stuff soon.
 
 ### Demo
+### v0.1
 You can check out a really simple [Demo right here](http://derekries.github.io/angular-notifications). Documentation beyond this README coming soon.
 
 ### Dependencies
-This component is an angularjs component so it should be obvious it depends on angular.
-Also for the default notifications **font-awesome 3.1.1** is required to display the icons.
+### v0.1
+[Angularjs](https://angularjs.org/)
+[Bootstrap.css](http://getbootstrap.com/)
+[fontawsome.css](http://fontawesome.io/)
 
 ### Installation
 After you've downloaded this repository, include both the css and javascript file
@@ -63,7 +66,6 @@ order to use HTML5 notifications so for this reason you should call enableHtml5M
 in a click event listener or something.
 
 
-### Coming Soon
-
- * Animations - Using ng-animate, will require a minimum of angular 1.1.4 for these
- * Better Looking, More Easily Styleable Notifications
+### More Info
+This is just a migration to upper angularjs, bootstrap and fontawesome.
+This repo is originally from [DerekRies](https://github.com/DerekRies/Angular-Notifications)
