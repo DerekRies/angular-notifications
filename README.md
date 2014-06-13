@@ -1,7 +1,5 @@
 ## Angular-Notifications
 
-### v0.1
-
 This particular component provides a service for creating notifications, and an
 easy to use directive for displaying those notifications. Also provides the ability
 to use Chrome Notifications instead.
@@ -9,11 +7,9 @@ to use Chrome Notifications instead.
 This is an early release, and I'm going to be changing a lot of stuff soon.
 
 ### Demo
-### v0.1
 You can check out a really simple [Demo right here](http://nramirez.github.io/angularNotifications). Documentation beyond this README coming soon.
 
 ### Dependencies
-### v0.1
 [Angularjs](https://angularjs.org/)
 [Bootstrap.css](http://getbootstrap.com/)
 [fontawsome.css](http://fontawesome.io/)
