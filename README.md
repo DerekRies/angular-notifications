@@ -11,7 +11,9 @@ You can check out a really simple [Demo right here](http://nramirez.github.io/an
 
 ### Dependencies
 [Angularjs](https://angularjs.org/)
+
 [Bootstrap.css](http://getbootstrap.com/)
+
 [fontawsome.css](http://fontawesome.io/)
 
 ### Installation
