@@ -1,0 +1,63 @@
+<html ng-app="demo" class="ng-scope">
+<head>
+    <title>Demo Page</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+    <link href="../src/css/notification.css" rel="stylesheet" />
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Angular Notifications</h1>
+            <p>An angularjs component to make notifications super easy!</p>
+            <p><a href="https://github.com/nramirez/angular-notifications" class="btn btn-primary">View On Github <i class="fa fa-github"></i></a></p>
+        </div>
+
+        <div notifications="bottom right" class="ng-isolate-scope ng-scope dr-notification-container bottom right"><!-- ngRepeat: noti in queue --></div>
+
+
+        <div class="container" ng-controller="mainCtrl">
+            <div class="row">
+                <form novalidate name="notificationForm" ng-submit="showNotification()" class="col-md-offset-2 col-md-5">
+                    <div class="row">
+                        <section class="col-md-12"
+                                 ng-class="{ 'has-error' :  submitted && notificationForm.notiTitle.$invalid}">
+                            <label for="Title" class="control-label">Notification Title:</label>
+                            <div>
+                                <input required name="notiTitle" type="text" ng-model="notiTitle" class='form-control' />
+                            </div>
+                            <p class="help-block" ng-show="submitted && notificationForm.notiTitle.$invalid">
+                                <code>Set a title please.</code>
+                            </p>
+
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col-md-12" ng-class="{ 'has-error' : submitted && notificationForm.notiText.$invalid}">
+                            <label for="Content" class="control-label">Notification Content:</label>
+                            <div>
+                                <input required name="notiText" type="text" ng-model="notiText" class='form-control' />
+                            </div>
+                            <p class="help-block" ng-show="submitted && notificationForm.notiText.$invalid">
+                                <code>Set a content please.</code>
+                            </p>
+                        </section>
+                    </div>
+                    <h3>Create a Notification</h3>
+                    <div class="btn-group">
+                        <button type="submit" ng-click="notiType='Info'" class="btn btn-info">Info</button>
+                        <button type="submit" ng-click="notiType='Warning'" class="btn btn-warning">Warning</button>
+                        <button type="submit" ng-click="notiType='Error'" class="btn btn-danger">Error</button>
+                        <button type="submit" ng-click="notiType='Success'" class="btn btn-success">Success</button>
+                    </div>
+                    <br>
+                    <br>
+                    <a class="btn btn-primary" ng-click="gimmeHTML5()">Enable HTML5 Notifications</a>
+                </form>
+            </div>
+
+        </div>
+        <script src="../src/js/angular.min.js"></script>
+        <script src="../src/js/notification.js"></script>
+        <script src="app.js"></script>
+
+    </body>
+</html>
