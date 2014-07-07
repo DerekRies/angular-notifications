@@ -3,8 +3,9 @@
 ### v0.2
 
 ### Dependencies
-This component is an angularjs component so it should be obvious it depends on angular.
-Also for the default notifications **font-awesome 3.1.1** is required to display the icons.
+
+- Bootstrap
+- AngularJS >= 1.2.x
 
 ### Installation
 After you've downloaded this repository, include both the css and javascript file
@@ -51,12 +52,14 @@ notifications by specifying an image to display in the notification.
 
 ### HTML5 Notifications
 If you want to use HTML5 notifications with the same API then you can call
-`$notification.enableHtml5Mode()`. **Note:** You will need permissions in
-order to use HTML5 notifications so for this reason you should call enableHtml5Mode
+`$notification.enableHtml5Mode()`. 
+
+**Note:** You will need permissions in
+order to use HTML5 notifications so for this reason you should call `enableHtml5Mode`
 in a click event listener or something.
 
 
- ### Thanks to
+### Thanks to
 
  - @fetrarij : https://github.com/DerekRies/angular-notifications/pull/9
  - @pablocaselas : https://github.com/DerekRies/angular-notifications/issues/7
