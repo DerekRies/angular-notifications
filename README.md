@@ -1,6 +1,6 @@
 ## Angular-Notifications
 
-### v0.1
+### v0.2
 
 This particular component provides a service for creating notifications, and an
 easy to use directive for displaying those notifications. Also provides the ability
@@ -43,14 +43,16 @@ like:
 
 You can use these methods with the following line of code
 
-`$notification.info(title, content, userData);`
-`$notification.warning(title, content, userData);`
-`$notification.error(title, content, userData);`
-`$notification.success(title, content, userData);`
+`$notification.info(title, content, userData, duration);`
+`$notification.warning(title, content, userData, duration);`
+`$notification.error(title, content, userData, duration);`
+`$notification.success(title, content, userData, duration);`
 
 **Title** is of course the title displayed in a large, bold text on the notification.
 **Content** is the additional detail text for that notification. The **userData** parameter
 is optional but allows you to store some data with a particular notification.
+
+**Duration** is optional (milliseconds): It allows you to set hhow long the notification is shown. Put `0` or `false` if you want a persistent notification. If not given it take the value in the setting.
 
 You can also use a generic notify method more inline with the standard chrome desktop
 notifications by specifying an image to display in the notification.
@@ -67,3 +69,11 @@ in a click event listener or something.
 
  * Animations - Using ng-animate, will require a minimum of angular 1.1.4 for these
  * Better Looking, More Easily Styleable Notifications
+
+ ### Thanks to
+
+ - @fetrarij : https://github.com/DerekRies/angular-notifications/pull/9
+ - @pablocaselas : https://github.com/DerekRies/angular-notifications/issues/7
+ - @deltapsilon : https://github.com/DerekRies/angular-notifications/pull/5
+ - @michaelwoods : https://github.com/valaky/angular-notifications/commit/2f05f7832f2af9e74b1fe68d55fe04aeabff52c7
+

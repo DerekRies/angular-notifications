@@ -1,9 +1,9 @@
 {
   "author": {
-    "name": "https://github.com/Derekries"
+    "name": "https://github.com/amcdnl"
   },
   "name": "angular-notifications",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "notification.js",
   "ignore": [
     "**/.*",
@@ -11,6 +11,6 @@
     "components"
   ],
   "dependencies": {
-    "angular": "~1.0.7"
+    "angular": "~1.1.3"
   }
 }
