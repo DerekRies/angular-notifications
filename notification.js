@@ -11,7 +11,7 @@
         // Browser globals
         factory(angular);
     }
-}(function ($) {
+}(function (angular) {
 
     var module = angular.module('notifications', []);
 
@@ -45,7 +45,7 @@
             localStorage: false,
             html5Mode: false,
             html5DefaultIcon: 'icon.png',
-            templateName: 'dr-notification-template'
+            templateName: 'ng-notification-template'
         };
         this.setSettings = function (s) {
             angular.extend(settings, s);
@@ -236,20 +236,20 @@
 
         this.$get = ['$timeout', '$templateCache',
             function ($timeout, $templateCache) {
-                if (!$templateCache.get('dr-notification-template')) {
-                    $templateCache.put('dr-notification-template',
-                        '<div class="dr-notification-wrapper" ng-repeat="noti in queue">' +
-                        '<div class="dr-notification-close-btn" ng-click="removeNotification(noti)">' +
+                if (!$templateCache.get('ng-notification-template')) {
+                    $templateCache.put('ng-notification-template',
+                        '<div class="ng-notification-wrapper" ng-repeat="noti in queue">' +
+                        '<div class="ng-notification-close-btn" ng-click="removeNotification(noti)">' +
                         '<i class="icon-remove"></i>' +
                         '</div>' +
-                        '<div class="dr-notification">' +
-                        '<div class="dr-notification-image dr-notification-type-{{noti.type}}" ng-switch on="noti.image">' +
+                        '<div class="ng-notification">' +
+                        '<div class="ng-notification-image ng-notification-type-{{noti.type}}" ng-switch on="noti.image">' +
                         '<i class="icon-{{noti.icon}}" ng-switch-when="false"></i>' +
                         '<img ng-src="{{noti.image}}" ng-switch-default />' +
                         '</div>' +
-                        '<div class="dr-notification-content">' +
-                        '<h3 class="dr-notification-title" ng-bind="noti.title"></h3>' +
-                        '<p class="dr-notification-text" ng-bind-html-unsafe="noti.content"></p>' +
+                        '<div class="ng-notification-content">' +
+                        '<h3 class="ng-notification-title" ng-bind="noti.title"></h3>' +
+                        '<p class="ng-notification-text" ng-bind-html-unsafe="noti.content"></p>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -274,7 +274,7 @@
             function link(scope, element, attrs) {
                 var position = attrs.notifications;
                 position = position.split(' ');
-                element.addClass('dr-notification-container');
+                element.addClass('ng-notification-container');
                 for (var i = 0; i < position.length; i++) {
                     element.addClass(position[i]);
                 }
