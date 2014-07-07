@@ -44,7 +44,6 @@
             details: true,
             localStorage: false,
             html5Mode: false,
-            html5DefaultIcon: 'icon.png',
             templateName: 'ng-notification-template'
         };
         this.setSettings = function (s) {
@@ -142,42 +141,26 @@
                 /* ============== NOTIFICATION METHODS ==============*/
 
                 info: function (title, content, userData, duration) {
-                    return this.awesomeNotify('info', 'info', title, content, userData, duration);
+                    return this.notify('info', 'info', title, content, userData, duration);
                 },
 
                 error: function (title, content, userData, duration) {
-                    return this.awesomeNotify('error', 'error', title, content, userData, duration);
+                    return this.notify('error', 'error', title, content, userData, duration);
                 },
 
                 success: function (title, content, userData, duration) {
-                    return this.awesomeNotify('success', 'success', title, content, userData, duration);
+                    return this.notify('success', 'success', title, content, userData, duration);
                 },
 
                 warning: function (title, content, userData, duration) {
-                    return this.awesomeNotify('warning', 'warning', title, content, userData, duration);
+                    return this.notify('warning', 'warning', title, content, userData, duration);
                 },
 
-                awesomeNotify: function (type, icon, title, content, userData) {
-                    /**
-                     * Supposed to wrap the makeNotification method for drawing icons using font-awesome
-                     * rather than an image.
-                     *
-                     * Need to find out how I'm going to make the API take either an image
-                     * resource, or a font-awesome icon and then display either of them.
-                     * Also should probably provide some bits of color, could do the coloring
-                     * through classes.
-                     */
-                    // image = '<i class="icon-' + image + '"></i>';
+                notify: function (type, icon, title, content, userData) {
                     return this.makeNotification(type, false, icon, title, content, userData);
                 },
 
-                notify: function (image, title, content, userData, duration) {
-                    // Wraps the makeNotification method for displaying notifications with images
-                    // rather than icons
-                    return this.makeNotification('custom', image, true, title, content, userData, duration);
-                },
-
-                makeNotification: function (type, image, icon, title, content, userData) {
+                makeNotification: function (type, image, icon, title, content, userData, duration) {
                     var notification = {
                         'type': type,
                         'image': image,
@@ -190,7 +173,7 @@
                     };
                     notifications.push(notification);
 
-                    if (duration == undefined) {
+                    if (duration === undefined) {
                         duration = settings[type].duration;
                     }
 
@@ -200,12 +183,9 @@
                         });
                     } else {
                         queue.push(notification);
-                        if (duration) {
-                            $timeout(function removeFromQueueTimeout() {
-                                queue.splice(queue.indexOf(notification), 1);
-                            }, duration);
-                        }
-
+                        $timeout(function removeFromQueueTimeout() {
+                            queue.splice(queue.indexOf(notification), 1);
+                        }, duration);
                     }
 
                     this.save();
@@ -230,7 +210,6 @@
                     notifications = [];
                     this.save();
                 }
-
             }
         }
 
@@ -239,17 +218,11 @@
                 if (!$templateCache.get('ng-notification-template')) {
                     $templateCache.put('ng-notification-template',
                         '<div class="ng-notification-wrapper" ng-repeat="noti in queue">' +
-                        '<div class="ng-notification-close-btn" ng-click="removeNotification(noti)">' +
-                        '<i class="icon-remove"></i>' +
-                        '</div>' +
-                        '<div class="ng-notification">' +
-                        '<div class="ng-notification-image ng-notification-type-{{noti.type}}" ng-switch on="noti.image">' +
-                        '<i class="icon-{{noti.icon}}" ng-switch-when="false"></i>' +
-                        '<img ng-src="{{noti.image}}" ng-switch-default />' +
-                        '</div>' +
+                        '<div class="ng-notification alert alert-{{noti.type}}">' +
                         '<div class="ng-notification-content">' +
-                        '<h3 class="ng-notification-title" ng-bind="noti.title"></h3>' +
-                        '<p class="ng-notification-text" ng-bind-html-unsafe="noti.content"></p>' +
+                        '<button type="button" class="close" data-dismiss="modal" ng-click="removeNotification(noti)">'+
+                        '<span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' + 
+                        '<span class="title" ng-bind="noti.title"></span>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
