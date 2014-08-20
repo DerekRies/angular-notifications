@@ -10,7 +10,7 @@ $bounce-in: cubic-bezier(0.310, 0.390, 0.210, 1.650);
 
 
 .dr-notification-container {
-  position:absolute;
+  position:fixed;
   z-index:10000;
 }
 
