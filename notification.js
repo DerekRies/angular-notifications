@@ -21,18 +21,18 @@ angular.module('notifications', []).
     };
 
     function html5Notify(icon, title, content, ondisplay, onclose){
-      if(window.webkitNotifications.checkPermission() === 0){
-        if(!icon){
-          icon = 'favicon.ico';
-        }
-        var noti = window.webkitNotifications.createNotification(icon, title, content);
+      if(window.Notification.permission == "granted"){
+        var options = {};
+        options.icon = icon || 'favicon.ico';
+        options.body = content;
+
+        var noti = new window.Notification(title, options);
         if(typeof ondisplay === 'function'){
-          noti.ondisplay = ondisplay;
+          noti.onshow = ondisplay;
         }
         if(typeof onclose === 'function'){
           noti.onclose = onclose;
         }
-        noti.show();
       }
       else {
         settings.html5Mode = false;
@@ -74,14 +74,14 @@ angular.module('notifications', []).
       },
 
       requestHtml5ModePermissions: function(){
-        if (window.webkitNotifications){
+        if (window.Notification){
           console.log('notifications are available');
-          if (window.webkitNotifications.checkPermission() === 0) {
+          if (window.Notification.permission === "granted") {
             return true;
           }
           else{
-            window.webkitNotifications.requestPermission(function(){
-              if(window.webkitNotifications.checkPermission() === 0){
+            window.Notification.requestPermission(function(){
+              if(window.Notification.permission === "granted"){
                 settings.html5Mode = true;
               }
               else{
@@ -112,7 +112,6 @@ angular.module('notifications', []).
       /* ============== NOTIFICATION METHODS ==============*/
 
       info: function(title, content, userData){
-        console.log(title, content);
         return this.awesomeNotify('info','info', title, content, userData);
       },
 
