@@ -19,7 +19,7 @@ Also for the default notifications **font-awesome 3.1.1** is required to display
 After you've downloaded this repository, include both the css and javascript file
 and then declare the notifications module as a dependency of your app module.
 
-e.g `angular.module('ngcomponentsApp', ['notifications'])`
+e.g `angular.module('ngcomponentsApp', ['$notification'])`
 
 Once you've finished that business you should be able to use the notifications service.
 If you want those notifications to show up on the screen however (optional), you
