@@ -156,8 +156,8 @@
                     return this.notify('warning', 'warning', title, content, userData, duration);
                 },
 
-                notify: function (type, icon, title, content, userData) {
-                    return this.makeNotification(type, false, icon, title, content, userData);
+                notify: function (type, icon, title, content, userData, duration) {
+                    return this.makeNotification(type, false, icon, title, content, userData, duration);
                 },
 
                 makeNotification: function (type, image, icon, title, content, userData, duration) {
@@ -183,9 +183,11 @@
                         });
                     } else {
                         queue.push(notification);
-                        $timeout(function removeFromQueueTimeout() {
-                            queue.splice(queue.indexOf(notification), 1);
-                        }, duration);
+                        if (duration) {
+                          $timeout(function removeFromQueueTimeout() {
+                              queue.splice(queue.indexOf(notification), 1);
+                          }, duration);
+                        }
                     }
 
                     this.save();
@@ -221,7 +223,7 @@
                         '<div class="ng-notification alert alert-{{noti.type}}">' +
                         '<div class="ng-notification-content">' +
                         '<button type="button" class="close" data-dismiss="modal" ng-click="removeNotification(noti)">'+
-                        '<span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' + 
+                        '<span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' +
                         '<span class="title" ng-bind="noti.title"></span>' +
                         '</div>' +
                         '</div>' +
