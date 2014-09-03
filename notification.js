@@ -62,21 +62,45 @@
                 queue = [];
 
             function html5Notify(icon, title, content, ondisplay, onclose) {
+              if (settings.html5Mode == 'webkit') {
                 if (window.webkitNotifications.checkPermission() === 0) {
-                    if (!icon) {
-                        icon = 'favicon.ico';
-                    }
-                    var noti = window.webkitNotifications.createNotification(icon, title, content);
-                    if (typeof ondisplay === 'function') {
-                        noti.ondisplay = ondisplay;
-                    }
-                    if (typeof onclose === 'function') {
-                        noti.onclose = onclose;
-                    }
-                    noti.show();
-                } else {
-                    settings.html5Mode = false;
+                  if (!icon) {
+                    icon = 'favicon.ico';
+                  }
+                  var noti = window.webkitNotifications.createNotification(icon, title, content);
+                  if (typeof ondisplay === 'function') {
+                    noti.ondisplay = ondisplay;
+                  }
+                  if (typeof onclose === 'function') {
+                    noti.onclose = onclose;
+                  }
+                  noti.show();
                 }
+                else {
+                  settings.html5Mode = false;
+                }
+              }
+              else if (settings.html5Mode == 'moz') {
+                if (!icon) {
+                  icon = 'favicon.ico';
+                }
+                try {
+                  Notification = window.Notification || window.mozNotification;
+                  var noti = new Notification(
+                    title,
+                    {
+                      body: content,
+                      dir: "auto",
+                      lang: "",
+                      tag: 'test',
+                      icon: icon
+                    }
+                    );
+                }
+                catch(err) {
+                  settings.html5Mode = false;
+                }
+              }
             }
 
 
@@ -114,22 +138,38 @@
                 },
 
                 requestHtml5ModePermissions: function () {
-                    if (window.webkitNotifications) {
-                        if (window.webkitNotifications.checkPermission() === 0) {
-                            return true;
-                        } else {
-                            window.webkitNotifications.requestPermission(function () {
-                                if (window.webkitNotifications.checkPermission() === 0) {
-                                    settings.html5Mode = true;
-                                } else {
-                                    settings.html5Mode = false;
-                                }
-                            });
-                            return false;
-                        }
-                    } else {
-                        return false;
+                  if (window.webkitNotifications) {
+                    //console.log('notifications are available');
+                    if (window.webkitNotifications.checkPermission() === 0) {
+                      return true;
                     }
+                    else{
+                      window.webkitNotifications.requestPermission(function() {
+                        if (window.webkitNotifications.checkPermission() === 0) {
+                          settings.html5Mode = 'webkit';
+                        }
+                        else {
+                          settings.html5Mode = false;
+                        }
+                      });
+                      return false;
+                    }
+                  }
+                  else if (window.Notification || window.mozNotification) {
+                    Notification = window.Notification || window.mozNotification;
+                    Notification.requestPermission(function(perm) {
+                      if (perm == 'granted') {
+                        settings.html5Mode = 'moz';
+                      }
+                      else {
+                        settings.html5Mode = false;
+                      }
+                    });
+                  }
+                  else {
+                    //console.log('notifications are not supported');
+                    return false;
+                  }
                 },
 
 
