@@ -162,8 +162,8 @@
                     return this.notify('warning', 'warning', title, content, userData, duration);
                 },
 
-                notify: function (type, icon, title, content, userData) {
-                    return this.makeNotification(type, false, icon, title, content, userData);
+                notify: function (type, icon, title, content, userData, duration) {
+                    return this.makeNotification(type, false, icon, title, content, userData, duration);
                 },
 
                 makeNotification: function (type, image, icon, title, content, userData, duration) {
@@ -190,9 +190,11 @@
                         });
                     } else {
                         queue.push(notification);
-                        $timeout(function removeFromQueueTimeout() {
-                            queue.splice(queue.indexOf(notification), 1);
-                        }, duration);
+                        if (duration) {
+                          $timeout(function removeFromQueueTimeout() {
+                              queue.splice(queue.indexOf(notification), 1);
+                          }, duration);
+                        }
                     }
 
                     this.save();
