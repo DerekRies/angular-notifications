@@ -256,6 +256,9 @@
                 },
 
                 clear: function () {
+                    $timeout(function() {
+                        queue.splice(0, queue.length);
+                    });
                     notifications = [];
                     this.save();
                 }
