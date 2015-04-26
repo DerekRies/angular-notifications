@@ -1,0 +1,38 @@
+.ng-notification-container {
+  position: absolute;
+  z-index: 10000;
+
+    &.bottom{
+        bottom: 20px;
+    }
+
+    &.right {
+        right: 20px;
+    }
+
+    &.left {
+        left: 20px;
+    }
+
+    &.top {
+        top: 35px;
+    }
+
+    &.center {
+        left: 50%;
+        margin-left: -175px;
+    }
+
+    .ng-notification-wrapper {
+        width: 350px;
+        position: relative;
+        margin: 5px 0;
+    }
+
+    .ng-notification {
+        clear: both;
+        max-height: 90px;
+        overflow: hidden;
+    }
+
+}

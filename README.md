@@ -1,25 +1,17 @@
-## Angular-Notifications
+## AngularJS Notifications
 
-### v0.1
-
-This particular component provides a service for creating notifications, and an
-easy to use directive for displaying those notifications. Also provides the ability
-to use Chrome Notifications instead.
-
-This is an early release, and I'm going to be changing a lot of stuff soon.
-
-### Demo
-You can check out a really simple [Demo right here](http://derekries.github.io/angular-notifications). Documentation beyond this README coming soon.
+### v0.2
 
 ### Dependencies
-This component is an angularjs component so it should be obvious it depends on angular.
-Also for the default notifications **font-awesome 3.1.1** is required to display the icons.
+
+- Bootstrap
+- AngularJS >= 1.2.x
 
 ### Installation
 After you've downloaded this repository, include both the css and javascript file
 and then declare the notifications module as a dependency of your app module.
 
-e.g `angular.module('ngcomponentsApp', ['notifications'])`
+e.g `angular.module('myApp', ['notifications'])`
 
 Once you've finished that business you should be able to use the notifications service.
 If you want those notifications to show up on the screen however (optional), you
@@ -28,7 +20,7 @@ specifying its position like so:
 
 `<div notifications="bottom right"></div>`
 
-You should now magically get notifications
+You should now magically get notifications!
 
 ### Usage
 
@@ -43,14 +35,16 @@ like:
 
 You can use these methods with the following line of code
 
-`$notification.info(title, content, userData);`
-`$notification.warning(title, content, userData);`
-`$notification.error(title, content, userData);`
-`$notification.success(title, content, userData);`
+`$notification.info(title, content, userData, duration);`
+`$notification.warning(title, content, userData, duration);`
+`$notification.error(title, content, userData, duration);`
+`$notification.success(title, content, userData, duration);`
 
 **Title** is of course the title displayed in a large, bold text on the notification.
-**Content** is the additional detail text for that notification. The **userData** parameter
+The **userData** parameter
 is optional but allows you to store some data with a particular notification.
+
+**Duration** is optional (milliseconds): It allows you to set hhow long the notification is shown. Put `0` or `false` if you want a persistent notification. If not given it take the value in the setting.
 
 You can also use a generic notify method more inline with the standard chrome desktop
 notifications by specifying an image to display in the notification.
@@ -58,12 +52,17 @@ notifications by specifying an image to display in the notification.
 
 ### HTML5 Notifications
 If you want to use HTML5 notifications with the same API then you can call
-`$notification.enableHtml5Mode()`. **Note:** You will need permissions in
-order to use HTML5 notifications so for this reason you should call enableHtml5Mode
+`$notification.enableHtml5Mode()`. 
+
+**Note:** You will need permissions in
+order to use HTML5 notifications so for this reason you should call `enableHtml5Mode`
 in a click event listener or something.
 
 
-### Coming Soon
+### Thanks to
 
- * Animations - Using ng-animate, will require a minimum of angular 1.1.4 for these
- * Better Looking, More Easily Styleable Notifications
+ - @fetrarij : https://github.com/DerekRies/angular-notifications/pull/9
+ - @pablocaselas : https://github.com/DerekRies/angular-notifications/issues/7
+ - @deltapsilon : https://github.com/DerekRies/angular-notifications/pull/5
+ - @michaelwoods : https://github.com/valaky/angular-notifications/commit/2f05f7832f2af9e74b1fe68d55fe04aeabff52c7
+

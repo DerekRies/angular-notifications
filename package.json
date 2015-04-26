@@ -1,0 +1,20 @@
+{
+  "name": "angular-notifications",
+  "version": "0.2.0",
+  "description": "An AngularJS component for easily creating notifications. Can also use HTML5 notifications",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "notifications"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-less": "^0.11.4",
+    "grunt-contrib-uglify": "^0.5.1"
+  }
+}
