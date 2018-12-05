@@ -1,5 +1,7 @@
 ## Angular-Notifications
 
+**This Repository is not maintained**
+
 ### v0.1
 
 This particular component provides a service for creating notifications, and an
