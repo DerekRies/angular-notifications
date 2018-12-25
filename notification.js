@@ -111,24 +111,24 @@ angular.module('notifications', []).
 
       /* ============== NOTIFICATION METHODS ==============*/
 
-      info: function(title, content, userData){
+      info: function(title, content, userData, duration){
         console.log(title, content);
-        return this.awesomeNotify('info','info', title, content, userData);
+        return this.awesomeNotify('info','info', title, content, userData, duration);
       },
 
-      error: function(title, content, userData){
-        return this.awesomeNotify('error', 'remove', title, content, userData);
+      error: function(title, content, userData, duration){
+        return this.awesomeNotify('error', 'remove', title, content, userData, duration);
       },
 
-      success: function(title, content, userData){
-        return this.awesomeNotify('success', 'ok', title, content, userData);
+      success: function(title, content, userData, duration){
+        return this.awesomeNotify('success', 'ok', title, content, userData, duration);
       },
 
-      warning: function(title, content, userData){
-        return this.awesomeNotify('warning', 'exclamation', title, content, userData);
+      warning: function(title, content, userData, duration){
+        return this.awesomeNotify('warning', 'exclamation', title, content, userData, duration);
       },
 
-      awesomeNotify: function(type, icon, title, content, userData){
+      awesomeNotify: function(type, icon, title, content, userData, duration){
         /**
          * Supposed to wrap the makeNotification method for drawing icons using font-awesome
          * rather than an image.
@@ -139,16 +139,16 @@ angular.module('notifications', []).
          * through classes.
          */
         // image = '<i class="icon-' + image + '"></i>';
-        return this.makeNotification(type, false, icon, title, content, userData);
+        return this.makeNotification(type, false, icon, title, content, userData, duration);
       },
 
-      notify: function(image, title, content, userData){
+      notify: function(image, title, content, userData, duration){
         // Wraps the makeNotification method for displaying notifications with images
         // rather than icons
         return this.makeNotification('custom', image, true, title, content, userData);
       },
 
-      makeNotification: function(type, image, icon, title, content, userData){
+      makeNotification: function(type, image, icon, title, content, userData, duration){
         var notification = {
           'type': type,
           'image': image,
@@ -156,10 +156,13 @@ angular.module('notifications', []).
           'title': title,
           'content': content,
           'timestamp': +new Date(),
-          'userData': userData
+          'userData': userData,
+	  'duration': duration
         };
         notifications.push(notification);
-
+	if(duration == undefined) {
+	  duration = settings[type].duration;
+	}
         if(settings.html5Mode){
           html5Notify(image, title, content, function(){
             console.log("inner on display function");
@@ -169,10 +172,11 @@ angular.module('notifications', []).
         }
         else{
           queue.push(notification);
-          $timeout(function removeFromQueueTimeout(){
-            queue.splice(queue.indexOf(notification), 1);
-          }, settings[type].duration);
-
+	  if(duration){
+            $timeout(function removeFromQueueTimeout(){
+              queue.splice(queue.indexOf(notification), 1);
+            }, duration);
+	  }
         }
 
         this.save();
