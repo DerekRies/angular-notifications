@@ -117,11 +117,11 @@ angular.module('notifications', []).
       },
 
       error: function(title, content, userData){
-        return this.awesomeNotify('error', 'remove', title, content, userData);
+        return this.awesomeNotify('error', 'times', title, content, userData);
       },
 
       success: function(title, content, userData){
-        return this.awesomeNotify('success', 'ok', title, content, userData);
+        return this.awesomeNotify('success', 'check', title, content, userData);
       },
 
       warning: function(title, content, userData){
@@ -216,11 +216,11 @@ angular.module('notifications', []).
     var html =
       '<div class="dr-notification-wrapper" ng-repeat="noti in queue">' +
         '<div class="dr-notification-close-btn" ng-click="removeNotification(noti)">' +
-          '<i class="icon-remove"></i>' +
+          '<i class="fa fa-times"></i>' +
         '</div>' +
         '<div class="dr-notification">' +
           '<div class="dr-notification-image dr-notification-type-{{noti.type}}" ng-switch on="noti.image">' +
-            '<i class="icon-{{noti.icon}}" ng-switch-when="false"></i>' +
+            '<i class="fa fa-{{noti.icon}}" ng-switch-when="false"></i>' +
             '<img ng-src="{{noti.image}}" ng-switch-default />' +
           '</div>' +
           '<div class="dr-notification-content">' +
